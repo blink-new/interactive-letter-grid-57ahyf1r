@@ -32,10 +32,11 @@ function App() {
 
   // Random transition effect with wave patterns
   useEffect(() => {
-    if (!isAnimating) return
+    if (!isAnimating || grid.length === 0) return
 
     const createWaveTransition = () => {
       setGrid(prevGrid => {
+        if (prevGrid.length === 0) return prevGrid
         const newGrid = [...prevGrid]
         
         // Create different transition patterns
@@ -139,7 +140,7 @@ function App() {
     }
     
     scheduleNext()
-  }, [isAnimating])
+  }, [isAnimating, grid.length])
 
   // Initialize grid on mount
   useEffect(() => {
